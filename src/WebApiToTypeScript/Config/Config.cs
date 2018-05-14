@@ -116,6 +116,8 @@ namespace WebApiToTypeScript.Config
 
         public string ResourcesNamespace { get; set; }
             = "Resources";
+        public bool ResourcesExportNamespace { get; set; }
+            = false;
 
         public string ResourcesOutputDirectory { get; set; }
             = "Generated";

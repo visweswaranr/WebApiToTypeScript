@@ -95,7 +95,7 @@ namespace WebApiToTypeScript.Resources
 
         private TypeScriptBlock CreateResourceBlock()
         {
-            return new TypeScriptBlock($"{Config.NamespaceOrModuleName} {Config.ResourcesNamespace}");
+            return new TypeScriptBlock($"{(Config.ResourcesExportNamespace ? "export" : "")} {Config.NamespaceOrModuleName} {Config.ResourcesNamespace}");
         }
     }
 }
