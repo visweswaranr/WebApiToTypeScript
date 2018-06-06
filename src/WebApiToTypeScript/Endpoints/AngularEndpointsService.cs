@@ -16,8 +16,9 @@ namespace WebApiToTypeScript.Endpoints
                     .AddHeader("import { HttpClient } from '@angular/common/http';")
                     .AddHeader("import { Observable } from 'rxjs/Observable';")
                     .AddHeader("import * as _ from 'lodash';")
-                    .AddHeader($"import {{ { Config.EndpointsNamespace } }} from './endpoints';\n")
-                    .AddHeader($"import {{ { Config.InterfacesNamespace } }} from './interfaces';\n")
+                    .AddHeader($"import {{ { Config.EndpointsNamespace } }} from './endpoints';")
+                    .AddHeader($"import {{ { Config.InterfacesNamespace } }} from './interfaces';")
+                    .AddHeader($"import {{ { Config.EnumsNamespace } }} from './enums';\n")
                     .AddHeader("@Injectable()")
                 .AddAndUseBlock
                 (
