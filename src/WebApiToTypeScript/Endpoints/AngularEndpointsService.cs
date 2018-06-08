@@ -27,11 +27,10 @@ namespace WebApiToTypeScript.Endpoints
 
                 var serviceBlock = constructorBlock
                     .Parent
-                    .AddAndUseBlock($"static call<TView>(http: HttpClient, endpoint: {Config.EndpointsNamespace}.IEndpoint, data)")
+                    .AddAndUseBlock($"static call<TView>(http: HttpClient, endpoint: {Config.EndpointsNamespace}.IEndpoint, data, httpConfig?)")
                     .AddAndUseBlock("const options: any  = ")
                     .AddStatement("method: endpoint._verb,")
                     .AddStatement("url: endpoint.toString()")
-                    //.AddStatement("params: data")
                     .Parent
                     .AddAndUseBlock($"if(endpoint._verb == 'GET')")
                     .AddStatement($"options.params = data;")
@@ -39,9 +38,10 @@ namespace WebApiToTypeScript.Endpoints
                     .AddAndUseBlock("else")
                     .AddStatement($"options.body = data;")
                     .Parent
-                    //.AddStatement($"const call = http.request(options.url, options);")
+                    .AddAndUseBlock("if(httpConfig)")
+                    .AddStatement("_.extend(options, httpConfig);")
+                    .Parent
                     .AddStatement($"const call: Observable<any> = http.request(options.method, options.url, options);")
-                    //.AddStatement("return call.map((response) => response.json()).toPromise();");
                     .AddStatement("return call.toPromise();");
 
                 return serviceBlock

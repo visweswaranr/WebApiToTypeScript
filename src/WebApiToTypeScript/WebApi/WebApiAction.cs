@@ -107,8 +107,8 @@ namespace WebApiToTypeScript.WebApi
             if(Config.ServiceUseAngularNext)
             {
                 return (!isFormBody || string.IsNullOrEmpty(callArgumentValueString))
-                 ? "null"
-                 : $"{callArgumentValueString}";
+                 ? "null, httpConfig"
+                 : $"{callArgumentValueString}, httpConfig";
             }
             else
             {
@@ -123,7 +123,7 @@ namespace WebApiToTypeScript.WebApi
             var isFormBody = verb == WebApiHttpVerb.Post || verb == WebApiHttpVerb.Put;
 
             if (!isFormBody)
-                return Config.ServiceUseAngularNext ? "" : "httpConfig?: ng.IRequestShortcutConfig";
+                return Config.ServiceUseAngularNext ? "httpConfig?" : "httpConfig?: ng.IRequestShortcutConfig";
 
             var bodyParam = BodyParameters
                 .Select(a => a.GetParameterString(withOptionals: false, interfaceName: true))
@@ -132,8 +132,8 @@ namespace WebApiToTypeScript.WebApi
             if (Config.ServiceUseAngularNext)
             {
                 return string.IsNullOrWhiteSpace(bodyParam)
-                ? ""
-                : $"{bodyParam}";
+                ? "httpConfig?"
+                : $"{bodyParam}, httpConfig?";
             }
             else
             {

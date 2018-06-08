@@ -151,8 +151,8 @@ namespace WebApiToTypeScript.Endpoints
 
             var callArgumentsList = Config.ServiceUseAngularNext
                                         ? string.IsNullOrWhiteSpace(callArgument)
-                                            ? ""
-                                            : $"{callArgument}"
+                                            ? "httpConfig?"
+                                            : $"{callArgument}, httpConfig?"
                                         : string.IsNullOrWhiteSpace(callArgument)
                                             ? "httpConfig?: ng.IRequestShortcutConfig"
                                             : $"{callArgument}, httpConfig?: ng.IRequestShortcutConfig";
