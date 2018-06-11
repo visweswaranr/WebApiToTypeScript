@@ -18,8 +18,14 @@ namespace WebApiToTypeScript.Endpoints
                     .AddHeader("import * as _ from 'lodash';")
                     .AddHeader($"import {{ { Config.EndpointsNamespace } }} from './endpoints';")
                     .AddHeader($"import {{ { Config.InterfacesNamespace } }} from './interfaces';")
-                    .AddHeader($"import {{ { Config.EnumsNamespace } }} from './enums';\n")
-                    .AddHeader("@Injectable()")
+                    .AddHeader($"import {{ { Config.EnumsNamespace } }} from './enums';\n");
+
+                if (!string.IsNullOrEmpty(Config.ServiceHeader))
+                {
+                    constructorBlock.AddHeader(Config.ServiceHeader);
+                }
+
+                constructorBlock = constructorBlock.AddHeader("@Injectable()")
                 .AddAndUseBlock
                 (
                     "constructor(http: HttpClient)"
