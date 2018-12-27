@@ -11,6 +11,8 @@ namespace WebApiToTypeScript.Endpoints
             if (Config.ServiceUseAngularNext)
             {
                 var constructorBlock = new TypeScriptBlock($"export class {Config.ServiceName}")
+                    .AddHeader("import { Injectable } from '@angular/core';")
+                    .AddHeader("import { HttpClient } from '@angular/common/http';")
                     .AddHeader($"import {{ { Config.EndpointsNamespace } }} from './endpoints';")
                     .AddHeader($"import {{ { Config.InterfacesNamespace } }} from './interfaces';")
                     .AddHeader($"import {{ { Config.EnumsNamespace } }} from './enums';\n");
