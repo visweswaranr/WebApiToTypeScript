@@ -14,7 +14,6 @@ namespace WebApiToTypeScript.Endpoints
             if(Config.ServiceUseAngularNext)
             {
                 block = new TypeScriptBlock($"export {Config.NamespaceOrModuleName} {Config.EndpointsNamespace}")
-                .AddHeader("import * as _ from 'lodash';")
                 .AddHeader($"import {{ { Config.InterfacesNamespace } }} from './interfaces';")
                 .AddHeader($"import {{ { Config.EnumsNamespace } }} from './enums';\n");
 
