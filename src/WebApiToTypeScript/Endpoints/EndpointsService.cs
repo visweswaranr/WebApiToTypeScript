@@ -40,8 +40,8 @@ namespace WebApiToTypeScript.Endpoints
                 .AddStatement($"var encodedItems = _.map(value, (item: any) => encodeURIComponent(item.toString()));")
                 .AddStatement($"_(encodedItems).each(item => parameters.push(`${{key}}=${{item}}`));")
                 .Parent
-                .AddAndUseBlock("else if (_.isObject(value) && value.getQueryParams)")
-                .AddStatement(@"addParameter(parameters, key, value.getQueryParams());")
+                .AddAndUseBlock("else if (_.isObject(value) && (value as any).getQueryParams)")
+                .AddStatement(@"addParameter(parameters, key, (value as any).getQueryParams());")
                 .Parent
                 .AddAndUseBlock("else if (_.isObject(value))")
                 .AddStatement(@"Object.keys(value).forEach((key) => { addParameter(parameters, key, value[key]); });")
